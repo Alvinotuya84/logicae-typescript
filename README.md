@@ -11,9 +11,7 @@
 5.CD directory you cloned
 
 6.run 
-
-    ```
-    bash
+    ```bash
    npm install 
    ```
    ```bash
