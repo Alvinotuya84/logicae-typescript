@@ -8,9 +8,9 @@
   ```bash
    git clone https://github.com/Alvinotuya84/logicae-typescript.git
    ```
-5.  ```bash
-   cd logicae-typescript
-
+5.  
+  ```bash
+   logicae-typescript
    ```
 
 6.run :
