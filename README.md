@@ -10,6 +10,7 @@
    git clone https://github.com/Alvinotuya84/logicae-typescript.git
    ```
 5.CD directory you cloned
+
 6.run 
 
     ```
