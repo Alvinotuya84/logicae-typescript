@@ -99,7 +99,7 @@ export default function Jokes() {
   const classes = useStyles();
 
   const [page, setPage] = React.useState<number>(1);
-  const [limit, setLimit] = React.useState<any>(5);
+  const [limit, setLimit] = React.useState<any>(10);
   const [jokesFilterered, setJokesFiltered] = React.useState(jokes)
   const [sortKey, setSortKey] = React.useState('');
   const [sortOrder, setSortOrder] = React.useState('asc');
