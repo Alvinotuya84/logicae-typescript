@@ -11,11 +11,11 @@
 5.CD directory you cloned
 
 6.run :
-    ```bash
-   npm install 
+  ```bash
+   npm install
    ```
    OR
-   ```bash
+  ```bash
    yarn
    ```
 7.After package installation run
