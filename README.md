@@ -1,6 +1,5 @@
 # Assignment
 ## RUNNING THE PROJECT
-
 1. Clone the project repository to your local machine using Git.
 2. Open your terminal or command prompt.
 3. Navigate to the directory where you want to clone the repository.
