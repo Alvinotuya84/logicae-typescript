@@ -10,10 +10,11 @@
    ```
 5.CD directory you cloned
 
-6.run 
+6.run :
     ```bash
    npm install 
    ```
+   OR
    ```bash
    yarn
    ```
