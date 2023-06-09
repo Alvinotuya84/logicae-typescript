@@ -1,4 +1,35 @@
 # Assignment
+## RUNNING THE PROJECT
+
+1. Clone the project repository to your local machine using Git.
+2. Open your terminal or command prompt.
+3. Navigate to the directory where you want to clone the repository.
+4. Run the following command to clone the repository:
+
+  ```bash
+   git clone https://github.com/Alvinotuya84/logicae-typescript.git
+   ```
+5.CD directory you cloned
+6.run 
+
+    ```
+    bash
+   npm install 
+   ```
+   ```bash
+   yarn
+   ```
+7.After package installation run
+```bash
+npm run dev
+```
+```bash
+yarn run dev
+```
+
+
+ 
+
 
 ## API
 
