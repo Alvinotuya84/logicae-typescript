@@ -9,9 +9,9 @@ import {toast} from 'react-hot-toast'
 
 export const getJokes=createAsyncThunk(
     "jokes/getJokes",
-    async (page:number) => {
+    async (args:any) => {
       try {
-        const response = await API.getJokes(page);
+        const response = await API.getJokes(args);
         return response.data;
       } catch (error) {
         throw new Error('Failed to fetch jokes.');

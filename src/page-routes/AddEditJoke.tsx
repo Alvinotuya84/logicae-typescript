@@ -7,6 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import CloseIcon from '@mui/icons-material/Close';
+import TrashIcon from "@mui/icons-material/Delete"
 import {useDispatch,useSelector} from 'react-redux'
 
 import { useNavigate,useLocation } from "react-router-dom";
@@ -173,6 +174,7 @@ export default function AddEditJoke() {
           {
             location?.state?.editMode && (
                 <Button 
+                
                 onClick={()=>{
                     
                 
@@ -188,7 +190,11 @@ export default function AddEditJoke() {
                 
                 color="error" sx={{
                                 margin:3
-                              }} endIcon={<CloseIcon />}>
+                              }} endIcon={<TrashIcon />}
+                              
+                                              disabled={loading}
+
+                              >
                   
                 Delete 
                 </Button>

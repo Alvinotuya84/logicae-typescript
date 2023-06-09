@@ -249,7 +249,7 @@ export default function ProtectedLayout() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              <Grid item xs={12}>
+              <Grid item xs={12} lg={12} sm={12} xl={12}>
 
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                 <Outlet/>

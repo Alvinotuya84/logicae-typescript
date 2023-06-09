@@ -6,7 +6,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@material-ui/styles';
-import {Pagination, Skeleton, Typography} from '@mui/material'
+import {Container, Grid, IconButton, InputLabel, MenuItem, Pagination, Select, Skeleton, TextField, Typography} from '@mui/material'
 import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom'
@@ -17,6 +17,9 @@ import { AppDispatch, RootState } from '../redux/store';
 import { getJokes } from '../redux/jokesSlice';
 import { formatDate, obfuscateEmail } from '../utils/functions';
 import { Joke } from '../types';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+
 
 // Generate Order Data
 function createData(
@@ -89,21 +92,88 @@ const useStyles = makeStyles({
 
 
 export default function Jokes() {
+  const {loading, error, jokes} = useSelector((state:RootState) => state.jokes);
+
+  
 
   const classes = useStyles();
 
   const [page, setPage] = React.useState<number>(1);
+  const [limit, setLimit] = React.useState<any>(5);
+  const [jokesFilterered, setJokesFiltered] = React.useState(jokes)
+  const [sortKey, setSortKey] = React.useState('');
+  const [sortOrder, setSortOrder] = React.useState('asc');
+  const [sortViewOrder, setViewsSortOrder] = React.useState('asc');
+
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
   const dispatch=useDispatch<AppDispatch>()
-  const {loading, error, jokes} = useSelector((state:RootState) => state.jokes);
+
+
+  
+  const handleSort = (key:string) => {
+    if (sortKey === key) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setViewsSortOrder(sortViewOrder === 'asc' ? 'desc' : 'asc');
+
+    } else {
+      setSortKey(key);
+      setSortOrder('asc');
+      setViewsSortOrder('asc');
+
+    }
+  };
+
+  const handleFilter = (event:any) => {
+     const searchValue = event.target.value;
+     const filteredItems = jokes.filter(
+       (item:Joke) =>
+         item.Views==searchValue ||
+         formatDate(item.CreatedAt).toLowerCase().includes(searchValue)
+     );
+     setJokesFiltered(filteredItems);
+  };
+
+  const sortByCreatedAtOrViews=(jokesFilterered:Joke[])=>{
+    let filteredItems=jokesFilterered
+
+     let sortedData = filteredItems.slice().sort((a, b) => {
+       if (sortKey === 'CreatedAt') {
+          return sortOrder === 'asc'
+            ? a.CreatedAt - b.CreatedAt
+            : b.CreatedAt - a.CreatedAt;
+       } else if (sortKey === 'Views') {
+          return sortViewOrder === 'asc' ? a.Views - b.Views : b.Views - a.Views;
+       }
+       return 0;
+     });
+     setJokesFiltered(sortedData)
+
+  }
+
+
 
   React.useEffect(() => {
-    dispatch(getJokes(page))
-  }, [page])
+    dispatch(getJokes({
+      page,
+      limit,
+    }))
+    console.log(limit)
+  }, [page,limit])
+  React.useEffect(()=>{
+    if(jokes.length>0){
+      setJokesFiltered(jokes)
+
+    }
+  }
+    ,[jokes]
+  )
   const navigate = useNavigate();
+  
+
+  
 
   
  
@@ -136,17 +206,38 @@ variant="contained" sx={{
   Add
   
 </Button> 
+<TextField id="filter" label="Filter By Views or Date" variant="outlined" 
+onChange={(e)=>handleFilter(e)}
+/>
+
       <Table className={classes.table}   sx={{
     [`& .${tableCellClasses.root}`]: {
       borderBottom: "none"
     }
-  }} size="medium">
+  }} size="small">
         <TableHead>
           <TableRow>
             <TableCell>Title</TableCell>
             <TableCell>Author</TableCell>
-            <TableCell>Created At</TableCell>
-            <TableCell>Views</TableCell>
+            <TableCell>Created At
+
+            <IconButton onClick={()=>{
+                sortByCreatedAtOrViews(jokesFilterered)
+                handleSort('CreatedAt')}}>
+              {sortOrder === 'asc'?(
+                <ArrowDropDown/>
+              ):(<ArrowDropUpIcon/>)}
+              </IconButton>
+            </TableCell>
+            <TableCell>Views
+              <IconButton onClick={()=>{
+                sortByCreatedAtOrViews(jokesFilterered)
+                handleSort('Views')}}>
+              {sortViewOrder === 'asc'?(
+                <ArrowDropDown/>
+              ):(<ArrowDropUpIcon/>)}
+              </IconButton>
+              </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -164,17 +255,17 @@ variant="contained" sx={{
           ))
  :
           
-          jokes.map((joke) => (
+ jokesFilterered.map((joke) => (
             <TableRow key={joke.id}>
-              <TableCell>      <Link color="primary"  onClick={(e)=>{
+              <TableCell>      <Button color="primary"  onClick={(e)=>{
                 
                 
                 preventDefault(e)
                 
                 navigate('/add-edit-joke',{ state: { joke, editMode:true } })
-                }} sx={{ mt: 3 }}>
+                }}>
               {joke.Title} 
-      </Link></TableCell>
+      </Button></TableCell>
               <TableCell>{obfuscateEmail(joke.Author)}</TableCell>
               <TableCell>{formatDate(joke.CreatedAt)}</TableCell>
               <TableCell><span style={{color:handleViewsColor(joke.Views)}}>{joke.Views}</span></TableCell>
@@ -182,10 +273,27 @@ variant="contained" sx={{
           ))}
         </TableBody>
       </Table>
-      <Pagination count={5}  page={page} onChange={handleChange}/>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more Page {page}
-      </Link>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3}>
+              <Grid item sm={12} lg={12} xs={12}>
+              <Pagination count={5}  page={page} onChange={handleChange}/>
+
+              </Grid>
+              <Grid item sm={4} lg={4} xs={4}>
+              <InputLabel id="limit">Limit</InputLabel>
+        <Select
+          labelId="limit"
+          id="limit"
+          value={limit}
+          label="Limit"
+          onChange={(e)=>setLimit(e.target.value)}
+        >
+          <MenuItem value={5}>Five</MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+        </Select>
+</Grid>
+            </Grid>
+          </Container>
     </React.Fragment>
   );
 }
