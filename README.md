@@ -22,6 +22,7 @@
 ```bash
 npm run dev
 ```
+OR
 ```bash
 yarn run dev
 ```
