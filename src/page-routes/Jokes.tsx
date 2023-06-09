@@ -255,22 +255,22 @@ onChange={(e)=>handleFilter(e)}
           ))
  :
           
- jokesFilterered.map((joke) => (
-            <TableRow key={joke.id}>
-              <TableCell>      <Button color="primary"  onClick={(e)=>{
-                
-                
-                preventDefault(e)
-                
-                navigate('/add-edit-joke',{ state: { joke, editMode:true } })
-                }}>
-              {joke.Title} 
-      </Button></TableCell>
-              <TableCell>{obfuscateEmail(joke.Author)}</TableCell>
-              <TableCell>{formatDate(joke.CreatedAt)}</TableCell>
-              <TableCell><span style={{color:handleViewsColor(joke.Views)}}>{joke.Views}</span></TableCell>
-            </TableRow>
-          ))}
+ jokesFilterered.map((joke) => joke?.CreatedAt?(
+  <TableRow key={joke.id}>
+  <TableCell>      <Button color="primary"  onClick={(e)=>{
+    
+    
+    preventDefault(e)
+    
+    navigate('/add-edit-joke',{ state: { joke, editMode:true } })
+    }}>
+  {joke.Title} 
+</Button></TableCell>
+  <TableCell>{obfuscateEmail(joke.Author)}</TableCell>
+  <TableCell>{formatDate(joke.CreatedAt)}</TableCell>
+  <TableCell><span style={{color:handleViewsColor(joke.Views)}}>{joke.Views}</span></TableCell>
+</TableRow>
+ ):null)}
         </TableBody>
       </Table>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
