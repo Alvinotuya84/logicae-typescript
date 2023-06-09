@@ -10,7 +10,7 @@
    ```
 5.  
   ```bash
-   logicae-typescript
+   cd logicae-typescript
    ```
 
 6.run :
