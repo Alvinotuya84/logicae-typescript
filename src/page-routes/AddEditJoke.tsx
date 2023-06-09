@@ -45,7 +45,11 @@ export default function AddEditJoke() {
 
     const location=useLocation()
     const navigate = useNavigate();
-    console.log(inputFormartedDate(location?.state?.joke?.CreateAt))
+
+    const [title, setTitle]=React.useState(location?.state?.joke?.Title)
+    const [views, setViews]=React.useState(location?.state?.joke?.Views)
+    const [author, setAuthor]=React.useState(location?.state?.joke?.Author)
+    const [createdAt, setCreatedAt]=React.useState(inputFormartedDate(location?.state?.joke?.CreatedAt))
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -116,7 +120,9 @@ export default function AddEditJoke() {
               label="Title"
               name="title"
               autoFocus
-              value={location?.state?.joke?.Title}
+              value={title}
+              onChange={(e)=>setTitle(e.target.value)}
+
             />
             <TextField
               margin="normal"
@@ -126,7 +132,9 @@ export default function AddEditJoke() {
               label="Author"
               type="text"
               id="author"
-              value={location?.state?.joke?.Author}
+              onChange={(e)=>setAuthor(e.target.value)}
+
+              value={author}
             />
 
              <TextField
@@ -137,7 +145,9 @@ export default function AddEditJoke() {
               label="Views"
               type="number"
               id="views"
-              value={location?.state?.joke?.Views}
+              onChange={(e)=>setViews(e.target.value)}
+
+              value={views}
             />
                          <TextField
               margin="normal"
@@ -147,7 +157,8 @@ export default function AddEditJoke() {
               label="Created At"
               type="date"
               id="created_at"
-              value={location?.state?.joke?.CreatedAt?inputFormartedDate(location?.state?.joke?.CreatedAt):null}
+              onChange={(e)=>setCreatedAt(e.target.value)}
+              value={createdAt}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
