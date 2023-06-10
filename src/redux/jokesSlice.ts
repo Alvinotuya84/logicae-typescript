@@ -65,11 +65,11 @@ const jokeSlice = createSlice({
       state.loading = false;
       state.jokes = payload;
     });
-    builder.addCase(getJokes.rejected, (state, action) => {
+    builder.addCase(getJokes.rejected, (state) => {
       state.loading = false;
       state.error = "Something went wrong please reload the page and try again";
     });
-    builder.addCase(getJokes.pending, (state, action) => {
+    builder.addCase(getJokes.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(addJoke.fulfilled, (state, { payload }) => {
@@ -80,7 +80,7 @@ const jokeSlice = createSlice({
         window.location.replace("/home");
       }, 1000);
     });
-    builder.addCase(addJoke.rejected, (state, action) => {
+    builder.addCase(addJoke.rejected, (state) => {
       state.loading = false;
       state.error = "Something went wrong please reload the page and try again";
       toast.error(`error Adding Joke`);
@@ -88,7 +88,7 @@ const jokeSlice = createSlice({
         window.location.replace("/home");
       }, 1000);
     });
-    builder.addCase(addJoke.pending, (state, action) => {
+    builder.addCase(addJoke.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(updateJoke.fulfilled, (state, { payload }) => {
@@ -100,7 +100,7 @@ const jokeSlice = createSlice({
         window.location.replace("/home");
       }, 1000);
     });
-    builder.addCase(updateJoke.rejected, (state, action) => {
+    builder.addCase(updateJoke.rejected, (state) => {
       state.loading = false;
       state.error = "Something went wrong please reload the page and try again";
       toast.error(`error updating Joke`);
@@ -108,7 +108,7 @@ const jokeSlice = createSlice({
         window.location.replace("/home");
       }, 1000);
     });
-    builder.addCase(updateJoke.pending, (state, action) => {
+    builder.addCase(updateJoke.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(deleteJoke.fulfilled, (state, { payload }) => {
@@ -120,7 +120,7 @@ const jokeSlice = createSlice({
         window.location.replace("/home");
       }, 1000);
     });
-    builder.addCase(deleteJoke.rejected, (state, action) => {
+    builder.addCase(deleteJoke.rejected, (state) => {
       state.loading = false;
       state.error = "Something went wrong please reload the page and try again";
       toast.error(`error deleting Joke`);
@@ -132,7 +132,7 @@ const jokeSlice = createSlice({
         window.location.replace("/home");
       }, 1000);
     });
-    builder.addCase(deleteJoke.pending, (state, action) => {
+    builder.addCase(deleteJoke.pending, (state) => {
       state.loading = true;
     });
   },
