@@ -31,7 +31,7 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
 
-    const {user, setUser} =useAuthContext()
+    const {user} =useAuthContext()
 
     const navigate = useNavigate();
 
