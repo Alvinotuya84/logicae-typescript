@@ -100,7 +100,10 @@ export default function ProtectedLayout() {
   const [open, setOpen] = React.useState(false);
   const { setTheme, darkTheme } = useThemeContext();
 
-  const toggleTheme = () => setTheme(!darkTheme);
+  const toggleTheme = () => {
+    setTheme(!darkTheme);
+    localStorage.setItem("theme", JSON.stringify(!darkTheme));
+  };
   const toggleDrawer = () => {
     setOpen(!open);
   };

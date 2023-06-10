@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/auth";
+import { useThemeContext } from "../../contexts/theme";
 
 function Copyright(props: any) {
   return (
@@ -31,9 +32,14 @@ function Copyright(props: any) {
   );
 }
 
-const defaultTheme = createTheme();
-
 export default function SignIn() {
+  const { darkTheme } = useThemeContext();
+
+  const defaultTheme = createTheme({
+    palette: {
+      mode: darkTheme ? "dark" : "light",
+    },
+  });
   const { user } = useAuthContext();
 
   const navigate = useNavigate();

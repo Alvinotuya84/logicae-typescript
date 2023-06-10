@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const themeContext = createContext<ThemeMethods>({
   darkTheme: false,
@@ -21,7 +21,14 @@ interface ThemeMethods {
 }
 
 function useThemeProvider() {
-  const [darkTheme, setTheme] = useState<boolean>(false);
+  const themeChecker = (): boolean => {
+    const data = localStorage.getItem("theme");
+    if (data !== null) {
+      return new RegExp("true").test(data);
+    }
+    return false;
+  };
+  const [darkTheme, setTheme] = useState<boolean>(themeChecker());
 
   return {
     darkTheme,

@@ -18,6 +18,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { addJoke, deleteJoke, updateJoke } from "../redux/jokesSlice";
 import { AppDispatch, RootState } from "../redux/store";
 import { convertDateToTimeStamp, inputFormartedDate } from "../utils/functions";
+import { useThemeContext } from "../contexts/theme";
 
 function Copyright(props: any) {
   return (
@@ -37,9 +38,14 @@ function Copyright(props: any) {
   );
 }
 
-const defaultTheme = createTheme();
-
 export default function AddEditJoke() {
+  const { darkTheme } = useThemeContext();
+
+  const defaultTheme = createTheme({
+    palette: {
+      mode: darkTheme ? "dark" : "light",
+    },
+  });
   const { loading } = useSelector((state: RootState) => state.jokes);
 
   const dispatch = useDispatch<AppDispatch>();
