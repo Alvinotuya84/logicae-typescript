@@ -174,7 +174,16 @@ export default function ProtectedLayout() {
             >
               {user.username}
             </Typography>
+
             <IconButton onClick={() => toggleTheme()} color="inherit">
+              <Typography
+                component="p"
+                color="inherit"
+                noWrap
+                sx={{ padding: 1 }}
+              >
+                Theme
+              </Typography>
               {darkTheme ? <Brightness5Icon /> : <Brightness4Icon />}
             </IconButton>
             <IconButton
