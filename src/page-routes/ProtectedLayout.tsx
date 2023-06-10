@@ -103,7 +103,6 @@ export default function ProtectedLayout() {
   const toggleTheme = () => setTheme(!darkTheme);
   const toggleDrawer = () => {
     setOpen(!open);
-    toggleTheme();
   };
   const navigate = useNavigate();
 
