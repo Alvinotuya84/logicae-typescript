@@ -67,13 +67,13 @@ export default function Jokes() {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSort = (key: string) => {
-    if (sortKey === key) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    if (key === "Views") {
+      setSortKey(key);
       setViewsSortOrder(sortViewOrder === "asc" ? "desc" : "asc");
     } else {
       setSortKey(key);
-      setSortOrder("asc");
-      setViewsSortOrder("asc");
+
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     }
   };
 
@@ -81,7 +81,7 @@ export default function Jokes() {
     const searchValue = event.target.value;
     const filteredItems = jokes.filter(
       (item: Joke) =>
-        item.Views == searchValue ||
+        `${item.Views}`.toLowerCase().includes(searchValue) ||
         formatDate(item.CreatedAt).toLowerCase().includes(searchValue)
     );
     setJokesFiltered(filteredItems);
@@ -110,7 +110,6 @@ export default function Jokes() {
         limit,
       })
     );
-    console.log(limit);
   }, [page, limit]);
   React.useEffect(() => {
     if (jokes.length > 0) {
