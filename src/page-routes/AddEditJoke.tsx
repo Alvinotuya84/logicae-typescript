@@ -19,6 +19,7 @@ import { addJoke, deleteJoke, updateJoke } from "../redux/jokesSlice";
 import { AppDispatch, RootState } from "../redux/store";
 import { convertDateToTimeStamp, inputFormartedDate } from "../utils/functions";
 import { useThemeContext } from "../contexts/theme";
+import { toast } from "react-hot-toast";
 
 function Copyright(props: any) {
   return (
@@ -66,6 +67,16 @@ export default function AddEditJoke() {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
+
+    if (
+      !data.get("title") ||
+      !data.get("views") ||
+      !data.get("body") ||
+      !data.get("author")
+    ) {
+      toast.error("All fields are required");
+      return false;
+    }
 
     if (!location?.state?.editMode) {
       dispatch(
