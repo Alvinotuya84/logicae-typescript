@@ -117,7 +117,7 @@ export default function ProtectedLayout() {
         <AppBar color="secondary" position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "24px", // keep right padding when drawer closed
+              pr: "24px",
             }}
           >
             <IconButton
@@ -193,20 +193,11 @@ export default function ProtectedLayout() {
               justifyContent: "flex-end",
               px: [1],
             }}
-          >
-            {/* <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton> */}
-          </Toolbar>
+          ></Toolbar>
           <Divider />
-          {/* <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List> */}
         </Drawer>
         <Box
-          component="main"
+          component="div"
           sx={{
             backgroundColor: (theme) =>
               theme.palette.mode === "light"
@@ -214,12 +205,11 @@ export default function ProtectedLayout() {
                 : theme.palette.grey[900],
             flexGrow: 1,
             height: "100vh",
-            overflow: "auto",
           }}
         >
           <Toolbar />
 
-          <Paper sx={{ p: 5, display: "flex", flexDirection: "column" }}>
+          <Paper sx={{ px: 5, display: "flex", flexDirection: "column" }}>
             <Outlet />
           </Paper>
         </Box>
