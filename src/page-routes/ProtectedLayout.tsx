@@ -116,6 +116,7 @@ export default function ProtectedLayout() {
         if (data !== null) {
         profile = JSON.parse(data);
         setUser(profile);
+        navigate("/home");
 
 
 
