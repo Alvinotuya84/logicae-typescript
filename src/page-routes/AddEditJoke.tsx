@@ -1,93 +1,91 @@
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import TrashIcon from "@mui/icons-material/Delete";
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Link from "@mui/material/Link";
+import TextField from "@mui/material/TextField";
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addJoke, deleteJoke, updateJoke } from '../redux/jokesSlice';
-import { AppDispatch, RootState } from '../redux/store';
-import { convertDateToTimeStamp, inputFormartedDate } from '../utils/functions';
-
+import { addJoke, deleteJoke, updateJoke } from "../redux/jokesSlice";
+import { AppDispatch, RootState } from "../redux/store";
+import { convertDateToTimeStamp, inputFormartedDate } from "../utils/functions";
 
 function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="/">
         Logicae
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
-
 const defaultTheme = createTheme();
 
 export default function AddEditJoke() {
-    const {loading} = useSelector((state:RootState) => state.jokes);
+  const { loading } = useSelector((state: RootState) => state.jokes);
 
-    const dispatch =useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
 
-    const location=useLocation()
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const [title, setTitle]=React.useState(location?.state?.joke?.Title)
-    const [views, setViews]=React.useState(location?.state?.joke?.Views)
-    const [author, setAuthor]=React.useState(location?.state?.joke?.Author)
-    const [createdAt, setCreatedAt]=React.useState(inputFormartedDate(location?.state?.joke?.CreatedAt))
+  const [title, setTitle] = React.useState(location?.state?.joke?.Title);
+  const [views, setViews] = React.useState(location?.state?.joke?.Views);
+  const [author, setAuthor] = React.useState(location?.state?.joke?.Author);
+  const [body, setBody] = React.useState(location?.state?.joke?.Body);
+
+  const [createdAt, setCreatedAt] = React.useState(
+    inputFormartedDate(location?.state?.joke?.CreatedAt)
+  );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
-
-
 
     const data = new FormData(event.currentTarget);
 
-    if(!location?.state?.editMode){
-        dispatch(addJoke({
-            Title:data.get('title'),
-            Views:data.get('views'),
-            Author:data.get('author'),
-            CreatedAt:convertDateToTimeStamp(data.get('created_at')),
-         }))
-    }else{
-        dispatch(updateJoke({
-            id:location?.state.joke?.id,
-            Title:data.get('title'),
-            Views:data.get('views'),
-            Author:data.get('author'),
-            CreatedAt:convertDateToTimeStamp(data.get('created_at')),
-         }))
+    if (!location?.state?.editMode) {
+      dispatch(
+        addJoke({
+          Title: data.get("title"),
+          Views: data.get("views"),
+          Body: data.get("body"),
+          Author: data.get("author"),
+          CreatedAt: new Date(),
+        })
+      );
+    } else {
+      dispatch(
+        updateJoke({
+          id: location?.state.joke?.id,
+          Title: data.get("title"),
+          Views: data.get("views"),
+          Author: data.get("author"),
+          Body: data.get("body"),
+          CreatedAt: convertDateToTimeStamp(data.get("created_at")),
+        })
+      );
     }
-
-
-
-
-
   };
 
- React.useEffect(() => {
-
-    
-}, [])
-  
-
-
-  
+  React.useEffect(() => {}, []);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -96,20 +94,23 @@ export default function AddEditJoke() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {
-                location.state.editMode? 'Update' : 'Add'
-            }
+            {location.state.editMode ? "Update" : "Add"}
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -119,8 +120,7 @@ export default function AddEditJoke() {
               name="title"
               autoFocus
               value={title}
-              onChange={(e)=>setTitle(e.target.value)}
-
+              onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -130,12 +130,21 @@ export default function AddEditJoke() {
               label="Author"
               type="text"
               id="author"
-              onChange={(e)=>setAuthor(e.target.value)}
-
+              onChange={(e) => setAuthor(e.target.value)}
               value={author}
             />
-
-             <TextField
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="body"
+              label="Body"
+              type="textarea"
+              id="body"
+              onChange={(e) => setBody(e.target.value)}
+              value={body}
+            />
+            <TextField
               margin="normal"
               required
               fullWidth
@@ -143,21 +152,22 @@ export default function AddEditJoke() {
               label="Views"
               type="number"
               id="views"
-              onChange={(e)=>setViews(e.target.value)}
-
+              onChange={(e) => setViews(e.target.value)}
               value={views}
             />
-                         <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="created_at"
-              label="Created At"
-              type="date"
-              id="created_at"
-              onChange={(e)=>setCreatedAt(e.target.value)}
-              value={createdAt}
-            />
+            {location?.state?.editMode && (
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="created_at"
+                label="Created At"
+                type="date"
+                id="created_at"
+                onChange={(e) => setCreatedAt(e.target.value)}
+                value={createdAt}
+              />
+            )}
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -167,56 +177,42 @@ export default function AddEditJoke() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              color='secondary'
+              color="secondary"
               disabled={loading}
             >
-               {
-                loading&&(
-                    <CircularProgress/>
-                )
-               } 
-              {
-              location?.state?.editMode?'Update Joke':'Add Joke'
-              } 
+              {loading && <CircularProgress />}
+              {location?.state?.editMode ? "Update Joke" : "Add Joke"}
             </Button>
           </Box>
-          {
-            location?.state?.editMode && (
-                <Button 
-                
-                onClick={()=>{
-                    
-                
-                    if(confirm("Are you sure you want to delete this Joke?")){
-                        dispatch(deleteJoke(location?.state?.joke?.id))
-                
-                    }else{}
-                
+          {location?.state?.editMode && (
+            <Button
+              onClick={() => {
+                if (confirm("Are you sure you want to delete this Joke?")) {
+                  dispatch(deleteJoke(location?.state?.joke?.id));
+                } else {
                 }
-                
-                
-                }
-                
-                color="error" sx={{
-                                margin:3
-                              }} endIcon={<TrashIcon />}
-                              
-                                              disabled={loading}
-
-                              >
-                  
-                Delete 
-                </Button>
-            )
-          }  
-          <Button 
-onClick={()=>navigate('/home')}
-variant="contained" sx={{
-                margin:3
-              }} endIcon={<CloseIcon />}>
-  Close
-  
-</Button>         </Box>
+              }}
+              color="error"
+              sx={{
+                margin: 3,
+              }}
+              endIcon={<TrashIcon />}
+              disabled={loading}
+            >
+              Delete
+            </Button>
+          )}
+          <Button
+            onClick={() => navigate("/home")}
+            variant="contained"
+            sx={{
+              margin: 3,
+            }}
+            endIcon={<CloseIcon />}
+          >
+            Close
+          </Button>{" "}
+        </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
