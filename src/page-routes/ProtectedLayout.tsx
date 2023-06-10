@@ -1,32 +1,29 @@
-import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import toast, { Toaster } from 'react-hot-toast';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import MuiDrawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
-import {Link,Outlet } from 'react-router-dom'
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
+import * as React from 'react';
+import { Toaster } from 'react-hot-toast';
+import { Link, Outlet } from 'react-router-dom';
 
-import MenuIcon from '@mui/icons-material/Menu';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Logout from '@mui/icons-material/Logout';
+import MenuIcon from '@mui/icons-material/Menu';
 import { User } from '../types';
 // import { mainListItems, secondaryListItems } from './listItems';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
- import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useAuthContext } from '../contexts/auth';
 import { useThemeContext } from '../contexts/theme';

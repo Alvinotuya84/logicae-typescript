@@ -1,25 +1,23 @@
-import * as React from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import TrashIcon from "@mui/icons-material/Delete";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import CloseIcon from '@mui/icons-material/Close';
-import TrashIcon from "@mui/icons-material/Delete"
-import {useDispatch,useSelector} from 'react-redux'
+import TextField from '@mui/material/TextField';
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useNavigate,useLocation } from "react-router-dom";
-import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { convertDateToTimeStamp, inputFormartedDate } from '../utils/functions';
-import { AppDispatch, RootState } from '../redux/store';
-import { addJoke, deleteJoke, updateJoke } from '../redux/jokesSlice';
+import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useLocation, useNavigate } from "react-router-dom";
+import { addJoke, deleteJoke, updateJoke } from '../redux/jokesSlice';
+import { AppDispatch, RootState } from '../redux/store';
+import { convertDateToTimeStamp, inputFormartedDate } from '../utils/functions';
 
 
 function Copyright(props: any) {

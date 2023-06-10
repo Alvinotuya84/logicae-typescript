@@ -1,4 +1,4 @@
-import React, {useState, useContext, createContext} from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const themeContext = createContext<ThemeMethods>({darkTheme: false, setTheme: undefined});
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Joke, JokeEntries } from '../types'
+import { JokeEntries } from '../types'
 
 
 const baseUrl =import.meta.env.VITE_BASE_URL

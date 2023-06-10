@@ -1,9 +1,7 @@
-import { TrainOutlined } from "@material-ui/icons";
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios";
-import { Joke, JokeEntries, JokesInitialState } from "../types";
-import * as API from './API'
-import {toast} from 'react-hot-toast'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from 'react-hot-toast';
+import { JokeEntries, JokesInitialState } from "../types";
+import * as API from './API';
 
 
 
