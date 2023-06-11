@@ -1,45 +1,29 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { AuthProvider } from './contexts/auth.tsx';
-import { createBrowserRouter ,RouterProvider} from 'react-router-dom';
-import { routes } from './routes/index.tsx';
-import { Provider } from 'react-redux';
-import store from './redux/store.ts';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { OverallThemeProvider } from './contexts/theme.tsx';
-
-
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
+import CssBaseline from "@mui/material/CssBaseline";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App.tsx";
+import { AuthProvider } from "./contexts/auth.tsx";
+import { OverallThemeProvider } from "./contexts/theme.tsx";
+import "./index.css";
+import store from "./redux/store.ts";
+import { routes } from "./routes/index.tsx";
 
 const router = createBrowserRouter(routes);
 
-
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-    <OverallThemeProvider>
-    <CssBaseline />
+      <OverallThemeProvider>
+        <CssBaseline />
 
-            <AuthProvider>
-            <RouterProvider router={router}/>
+        <AuthProvider>
+          <RouterProvider router={router} />
 
-            <App />
-
-
-
-      </AuthProvider>
+          <App />
+        </AuthProvider>
       </OverallThemeProvider>
-
-      </Provider>
-
-  </React.StrictMode>,
-)
+    </Provider>
+  </React.StrictMode>
+);

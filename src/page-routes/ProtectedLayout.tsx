@@ -153,7 +153,11 @@ export default function ProtectedLayout() {
               {user.username}
             </Typography>
 
-            <IconButton onClick={() => toggleTheme()} color="inherit">
+            <IconButton
+              aria-label="ToggleTheme"
+              onClick={() => toggleTheme()}
+              color="inherit"
+            >
               <Typography
                 component="p"
                 color="inherit"
@@ -165,6 +169,7 @@ export default function ProtectedLayout() {
               {darkTheme ? <Brightness5Icon /> : <Brightness4Icon />}
             </IconButton>
             <IconButton
+              aria-label="Logout"
               onClick={() => {
                 localStorage.removeItem("profile");
                 navigate("/login");

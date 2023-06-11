@@ -29,7 +29,14 @@ OR
 ```bash
 yarn run dev
 ```
-
+8.Running Unit Tests
+```bash
+npm run test
+```
+OR
+```bash
+yarn test
+```
 
  
 

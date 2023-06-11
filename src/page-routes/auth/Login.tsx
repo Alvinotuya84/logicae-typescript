@@ -94,6 +94,7 @@ export default function SignIn() {
               required
               fullWidth
               id="username"
+              inputProps={{ "aria-label": "username" }}
               label="User Name"
               name="username"
               autoFocus
@@ -105,6 +106,7 @@ export default function SignIn() {
             /> */}
             <Button
               type="submit"
+              aria-label="Login"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
